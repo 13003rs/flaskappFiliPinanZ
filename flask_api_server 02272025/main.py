@@ -52,7 +52,7 @@ def recommend_strategy(classification):
 @app.route('/')
 
 def hello_world():
-    return ''
+    return 'FiliPinanZ'
 
 
 # App route for classifying users
