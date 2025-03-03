@@ -221,8 +221,7 @@ def map_user_goal_duration(ui_savings_percentage_df):
     '1-2 years':18,
     '3-5 years':48,
     '6-10 years':96,
-    '11-20 years':186,
-    '20 years and up':240
+    '11 years and up':186,
 })
     
 # Function for Savings Percentage Based on Target EFund Amount and Goal Duration:
