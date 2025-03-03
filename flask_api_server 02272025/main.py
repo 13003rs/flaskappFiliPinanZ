@@ -369,6 +369,14 @@ def generate_saving_perc_recommendation():
         user_average_monthly_cashflow = ui_cbf_saving_perc_data.get('Average_Monthly_Cashflow', 0) # To get the User's Monthly Cashflow
         print(f"\nUSER'S AVERAGE MONTHLY CASHFLOW:\n{user_average_monthly_cashflow}\n") # For checking
 
+        user_average_monthly_expense = ui_cbf_saving_perc_data.get('Average_Monthly_Expense', 0) # To get the User's Monthly Expense
+        print(f"\nUSER'S AVERAGE MONTHLY EXPENSE:\n{user_average_monthly_cashflow}\n") # For checking 
+
+        user_max_saving_capacity = user_average_monthly_cashflow - user_average_monthly_expense
+        print(f"\nUSER'S MAX SAVINGS MONTHLY CAPACITY:\n{user_max_saving_capacity}\n") # For checking 
+
+
+
         recommended_savings_amount=(saving_percentage_recommendation/100)*user_average_monthly_cashflow
         print(f"\nUSER'S RECOMMENDED SAVINGS AMOUNT:\n{recommended_savings_amount}\n") # For checking
 
@@ -387,7 +395,9 @@ def generate_saving_perc_recommendation():
             "Recommended Saving Percentage": final_recommended_savings_percentage,
             "Message": recommendation_message,
             "CBF Recommended Savings Percentage":saving_percentage_recommendation,
-            "Goal Duration": user_goal_duration
+            "Goal Duration": user_goal_duration,
+            "Required Monthly Savings":user_required_monthly_savings,
+            "Max Saving Capacity":user_max_saving_capacity
         })
 
     except Exception as e:
