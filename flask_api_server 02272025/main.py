@@ -212,18 +212,23 @@ def categorize_user_cashflow_input(value):
 
 # Function for categorizing/mapping the Goal Duration:
 def map_user_goal_duration(ui_savings_percentage_df):
-    # The values that I have set here are generated from the median of each values like for instance, the median of 1-2 months is 1.5
-    # Formula: (1+2)/2= 1.5, also yung sa years naka convert siya into months, hence why 18 yung value ni 1-2 years
-    ui_savings_percentage_df['Goal_Duration']=ui_savings_percentage_df['Goal_Duration'].map({
-    '1-2 months':1.5,
-    '3-5 months':4,
-    '6-12 months':9,
-    '1-2 years':18,
-    '3-5 years':48,
-    '6-10 years':96,
-    '11 years and up':186
-})
-    return ui_savings_percentage_df  
+    mapping = {
+        '1-2 months': 1.5,
+        '3-5 months': 4,
+        '6-12 months': 9,
+        '1-2 years': 18,
+        '3-5 years': 48,
+        '6-10 years': 96,
+        '11 years and up': 186
+    }
+    
+    # Map values
+    ui_savings_percentage_df['Goal_Duration'] = ui_savings_percentage_df['Goal_Duration'].map(mapping)
+    
+    # Replace NaN with a default value (e.g., 0 or a safe number)
+    ui_savings_percentage_df['Goal_Duration'] = ui_savings_percentage_df['Goal_Duration'].replace(np.nan, 0)
+
+    return ui_savings_percentage_df
 
 # Function for Savings Percentage Based on Target EFund Amount and Goal Duration:
 
