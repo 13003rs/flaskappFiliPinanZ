@@ -223,18 +223,21 @@ def map_user_goal_duration(ui_savings_percentage_df):
     '6-10 years':96,
     '11 years and up':186,
 })
-    
+    return ui_savings_percentage_df  
+
 # Function for Savings Percentage Based on Target EFund Amount and Goal Duration:
 
 def get_required_monthly_savings(ui_savings_percentage_df):
     user_target_efund_amount=ui_savings_percentage_df['Target_Efund_Amount'].values[0]
     
     # Have the Goal_Duration mapped first
-    user_goal_duration=map_user_goal_duration(ui_savings_percentage_df)
-
-    # Then assign the value of the mapped Goal Duration
+    ui_savings_percentage_df = map_user_goal_duration(ui_savings_percentage_df)
+    
+     # Then assign the value of the mapped Goal Duration
     user_goal_duration = ui_savings_percentage_df['Goal_Duration'].values[0]
     print(f"USER MAPPED GOAL DURATION:\n{user_goal_duration}") # For checking
+
+
 
 
     required_monthly_savings = user_target_efund_amount/user_goal_duration.round(2)
