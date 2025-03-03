@@ -221,7 +221,7 @@ def map_user_goal_duration(ui_savings_percentage_df):
     '1-2 years':18,
     '3-5 years':48,
     '6-10 years':96,
-    '11 years and up':186,
+    '11 years and up':186
 })
     return ui_savings_percentage_df  
 
@@ -232,7 +232,7 @@ def get_required_monthly_savings(ui_savings_percentage_df):
     
     # Have the Goal_Duration mapped first
     ui_savings_percentage_df = map_user_goal_duration(ui_savings_percentage_df)
-    
+
      # Then assign the value of the mapped Goal Duration
     user_goal_duration = ui_savings_percentage_df['Goal_Duration'].values[0]
     print(f"USER MAPPED GOAL DURATION:\n{user_goal_duration}") # For checking
