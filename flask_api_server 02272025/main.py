@@ -389,16 +389,19 @@ def generate_saving_perc_recommendation():
 
      
         print(f"\nFINAL RECOMMENDED SAVINGS PERCENTAGE:\n{final_recommended_savings_percentage}\n Message \n{recommendation_message}\n") # For checking
-
-        # Return JSON response
-        return jsonify({
+        
+        response_data = {
             "Recommended Saving Percentage": final_recommended_savings_percentage,
             "Message": recommendation_message,
-            "CBF Recommended Savings Percentage":saving_percentage_recommendation,
+            "CBF Recommended Savings Percentage": saving_percentage_recommendation,
             "Goal Duration": user_goal_duration,
-            "Required Monthly Savings":user_required_monthly_savings,
-            "Max Saving Capacity":user_max_saving_capacity
-        })
+            "Required Monthly Savings": user_required_monthly_savings,
+            "Max Saving Capacity": user_max_saving_capacity
+        }
+
+        print(f"API RESPONSE TO ANDROID:\n{json.dumps(response_data, indent=4)}")  # Debugging
+
+        return jsonify(response_data)
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
