@@ -118,13 +118,15 @@ def define_saving_perc_matrix():
                             'Self-Employed','Self-Employed','Self-Employed','Self-Employed'],
         'Average_Monthly_Cashflow': ['Less than ₱5,000', '₱5,000 - ₱9,999', '₱10,000 - ₱15,000', 'More than ₱15,000'] * 6,
         'Cashflow_Frequency': ['Low', 'Medium', 'High', 'Very High'] * 6,
-        'Recommended_Savings_Percentage': [5, 10, 15, 20,
-                                        5, 10, 15, 20,
-                                        8, 12, 18, 25,
-                                        3, 5, 8, 10,
-                                        2, 5, 8, 10,
-                                        5, 10, 15, 25]
-                                        }
+        'Recommended_Savings_Percentage': [
+            5, 10, 15, 20,  # Working Student 
+            8, 12, 18, 25,  # Part-time 
+            12, 18, 22, 30, # Full-time Employee → Highest stable income, should save more
+            5, 7, 10, 15,   # Full-time Student 
+            3, 5, 7, 10,    # Unemployed
+            8, 15, 20, 28   # Self-Employed 
+        ]
+    }
     
     # Converting the defined Data into a DF:
     cbf_saving_percent_df=pd.DataFrame(cbf_saving_percentage_data)
