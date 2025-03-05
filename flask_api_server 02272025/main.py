@@ -268,7 +268,11 @@ def determine_final_savings_percentage(user_required_monthly_savings, recommende
         user_max_possible_savings_percentage = round((user_max_saving_capacity / user_average_monthly_cashflow) * 100, 2)
         print(f"\nUSER'S MAX SAVINGS PERCENTAGE:\n{user_max_possible_savings_percentage}\n") # For checking
 
-        if user_required_monthly_savings <= user_max_saving_capacity:
+        if saving_percentage_recommendation <=user_max_possible_savings_percentage:
+            final_recommended_savings_percentage = saving_percentage_recommendation
+            recommendation_message = "Great! Your savings goal fits well with your financial situation. You can proceed with the recommended savings plan."
+
+        elif user_required_monthly_savings <= user_max_saving_capacity:
             if user_max_possible_savings_percentage <= 20:
                 final_recommended_savings_percentage = user_max_possible_savings_percentage
                 recommendation_message = "You’re on track! This savings percentage works well for your finances."
