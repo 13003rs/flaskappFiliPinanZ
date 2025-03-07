@@ -237,55 +237,9 @@ def get_required_monthly_savings(ui_savings_percentage_df):
     user_goal_duration = ui_savings_percentage_df['Goal_Duration'].values[0]
     print(f"USER MAPPED GOAL DURATION:\n{user_goal_duration}") # For checking
 
-
-
-
     required_monthly_savings = user_target_efund_amount/user_goal_duration.round(2)
 
     return required_monthly_savings, user_goal_duration
-
-# Function for determining the Final Savings Percentage
-def determine_final_savings_percentage(user_required_monthly_savings, recommended_savings_amount, 
-                                       saving_percentage_recommendation, ui_cbf_saving_percentage_df, 
-                                       user_average_monthly_cashflow):
-
-    final_recommended_savings_percentage = 0
-    recommendation_message = ""
-
-    # Determine Final Recommended Savings Percentage
-    if user_required_monthly_savings <= recommended_savings_amount:
-        final_recommended_savings_percentage = saving_percentage_recommendation
-        recommendation_message = "Great! Your savings goal fits well with your financial situation. You can proceed with the recommended savings plan."
-
-    else:
-        # Get User's Monthly Expense
-        user_monthly_expense = ui_cbf_saving_percentage_df['Average_Monthly_Expense'].values[0]
-
-        # Calculate User's Max Savings Capacity
-        user_max_saving_capacity = user_average_monthly_cashflow - user_monthly_expense
-        print(f"\nUSER'S MAX SAVINGS CAPACITY:\n{user_max_saving_capacity}\n") # For checking
-
-
-        # Calculate Max Possible Savings Percentage
-        user_max_possible_savings_percentage = round((user_max_saving_capacity / user_average_monthly_cashflow) * 100, 2)
-        print(f"\nUSER'S MAX SAVINGS PERCENTAGE:\n{user_max_possible_savings_percentage}\n") # For checking
-
-        if saving_percentage_recommendation <=user_max_possible_savings_percentage:
-            final_recommended_savings_percentage = saving_percentage_recommendation
-            recommendation_message = "Great! Your savings goal fits well with your financial situation. You can proceed with the recommended savings plan."
-
-        elif user_required_monthly_savings <= user_max_saving_capacity:
-            if user_max_possible_savings_percentage <= 20:
-                final_recommended_savings_percentage = user_max_possible_savings_percentage
-                recommendation_message = "You’re on track! This savings percentage works well for your finances."
-            else:
-                final_recommended_savings_percentage = user_max_possible_savings_percentage
-                recommendation_message = "You can save this amount, but it's higher than the ideal 20%. We suggest adjusting your budget or timeline to ensure it won’t strain your budget."
-        else:
-            recommendation_message = "It looks like your required monthly savings to reach your emergency fund goal within your set duration is higher than what you can comfortably set aside each month."
-            final_recommended_savings_percentage = user_max_possible_savings_percentage  
-
-    return final_recommended_savings_percentage, recommendation_message
 
 
 # API for recommending the Saving Percentage (this will be the one that will generate the recommendations for the Saving percentage)
@@ -360,7 +314,8 @@ def generate_saving_perc_recommendation():
         saving_percentage_recommendation = cbf_saving_percentage_matrix_df.iloc[best_match_saving_percentage]['Recommended_Savings_Percentage']
         print(f"\n Recommended Saving Percent\n{saving_percentage_recommendation}")
 
-                             # THIS IS FOR GETTING THE RECOMMENDED SAVINGS PERCENTAGE NA KASAMA NA YUNG TARGET EFUND AND GOAL DURATION: 
+        final_recommended_savings_percentage=saving_percentage_recommendation
+
 
         # Check the user's Recommended Saving's Percentage Based on their Target Emergency Fund Amount and Goal Duration: 
         # Formula: Target Efnf Amount / Goal Duration:
@@ -369,32 +324,12 @@ def generate_saving_perc_recommendation():
         print(f"USER'S MAPPED GOAL DURATION:\n{user_goal_duration}\n") # For checking
 
 
-        # To get the exact amount of the recommended Savings Amount using the System's Generated Recommended Savings Percentage: 
-        # Formula is: recommended_savings_amount = saving_percentage_recommendation * user's monthly income
-
-        user_average_monthly_cashflow = ui_cbf_saving_perc_data.get('Average_Monthly_Cashflow', 0) # To get the User's Monthly Cashflow
-        print(f"\nUSER'S AVERAGE MONTHLY CASHFLOW:\n{user_average_monthly_cashflow}\n") # For checking
-
-
-        recommended_savings_amount=(saving_percentage_recommendation/100)*user_average_monthly_cashflow
-        print(f"\nUSER'S RECOMMENDED SAVINGS AMOUNT:\n{recommended_savings_amount}\n") # For checking
-
-       # Call the function to determine the final recommended savings percentage
-        final_recommended_savings_percentage, recommendation_message= determine_final_savings_percentage(
-            user_required_monthly_savings, recommended_savings_amount, 
-            saving_percentage_recommendation, ui_cbf_saving_percentage_df, 
-            user_average_monthly_cashflow
-        )
-
-     
-        print(f"\nFINAL RECOMMENDED SAVINGS PERCENTAGE:\n{final_recommended_savings_percentage}\n Message \n{recommendation_message}\n") # For checking
 
         # Return JSON response
         return jsonify({
             "Recommended Saving Percentage": final_recommended_savings_percentage,
-            "Message": recommendation_message,
-            "CBF Recommended Savings Percentage":saving_percentage_recommendation,
             "Goal Duration": user_goal_duration
+        
         })
 
     except Exception as e:
