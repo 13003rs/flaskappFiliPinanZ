@@ -314,8 +314,6 @@ def generate_saving_perc_recommendation():
         saving_percentage_recommendation = cbf_saving_percentage_matrix_df.iloc[best_match_saving_percentage]['Recommended_Savings_Percentage']
         print(f"\n Recommended Saving Percent\n{saving_percentage_recommendation}")
 
-        final_recommended_savings_percentage=saving_percentage_recommendation
-
 
         # Check the user's Recommended Saving's Percentage Based on their Target Emergency Fund Amount and Goal Duration: 
         # Formula: Target Efnf Amount / Goal Duration:
@@ -327,7 +325,7 @@ def generate_saving_perc_recommendation():
 
         # Return JSON response
         return jsonify({
-            "Recommended Saving Percentage": final_recommended_savings_percentage,
+            "Recommended Saving Percentage": saving_percentage_recommendation,
             "Goal Duration": user_goal_duration
         
         })
