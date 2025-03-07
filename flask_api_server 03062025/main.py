@@ -325,7 +325,7 @@ def generate_saving_perc_recommendation():
 
         # Return JSON response
         return jsonify({
-            "Recommended Saving Percentage": saving_percentage_recommendation,
+            "CBF Recommended Saving Percentage": saving_percentage_recommendation,
             "Goal Duration": user_goal_duration
         
         })
