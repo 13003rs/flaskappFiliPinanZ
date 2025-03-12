@@ -15,27 +15,27 @@ rfc_model=load('random_forest_model.joblib') # to load the model
 
 # Mappings for the responses (for preprocessing)
 allocation_behavior_map={
-    "I’ll divide my income into flexible budgets based on my needs and goals.": 8,
-    "I will allocate my money into specific categories (e.g, rent, groceries) and stick to those amounts.": 2,
-    "I will prioritize allocating it for saving or investments right away and then spend freely for the rest of the month.":3
+    "I will allocate my income into flexible budgets according to my needs and goals.": 8,
+    "I will allocate my money to specific categories (e.g, rent, groceries) and stick to the set amounts.": 2,
+    "I will focus on saving or investing first, then freely spend for the remaining amount for the rest of the month.":3
     }
 
 finance_management_map={
     "Save First, Spend Later: I make saving my top priority and only allocate what's left afterwards":6,
-    "The Flexible Allocator: I break down my income into a mix of savings, essentials, and some fun—whatever feels right!":8,
-    "The Tracker: I keep tabs on every single expense—gotta know where my money’s going!":2
+    "The Flexible Allocator: I divide my income between savings, essentials, and some fun—whatever feels right!":8,
+    "The Tracker: I keep tabs on every single expense—I need to know where my money is going!":2
     }
 
 budgeting_preference_map={
-    "Chill Budgeting: I don't stress over a detailed plan but aim to stay generally within a budget while keeping some flexibility":8,
-    "Strict Budgeting:I prefer to stick to a strict budget where each category has a set limit and don't go over those amounts.":2,
-    "Savings First, Budget Later: I make saving my top priority before I spend, setting aside money right away for my goals.":6
+    "Chill Budgeting: I don't focus on a detailed plan, but I aim to stay within a budget while maintaining some flexibility.":8,
+    "Strict Budgeting: I prefer to follow a strict budget, setting specific limits for each categories and ensuring I don't exceed those amounts":2,
+    "Savings First, Budget Later: I focus on saving first, setting aside money for my goals before spending.":6
     }
 
 debt_management_preference_map={
-    "I set aside a specific amount for both savings and debt repayment each month.":2,
+    "I set aside a fixed amount each month for both savings and debt repayment.":2,
     "I divide my income proportionally between savings, debt, and other expenses.":7,
-    "I save first and then allocate whatever's left for debt repayment.":3
+    "I save first and then allocate any remaining funds for debt repayment.":3
 }
 
 
@@ -325,9 +325,8 @@ def generate_saving_perc_recommendation():
 
         # Return JSON response
         return jsonify({
-            "CBF Recommended Savings Percentage": saving_percentage_recommendation,
+            "CBF Recommended Savings Percentage":saving_percentage_recommendation,
             "Goal Duration": user_goal_duration
-        
         })
 
     except Exception as e:
