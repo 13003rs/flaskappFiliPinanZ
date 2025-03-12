@@ -21,7 +21,7 @@ allocation_behavior_map={
     }
 
 finance_management_map={
-    "Save First, Spend Later: My top priority is saving, and I only spend what's left afterwards":6,
+    "Save First, Spend Later: My top priority is saving, and I only spend what's left afterwards.":6,
     "The Flexible Allocator: I divide my income between savings, essentials, and some fun—whatever feels right!":8,
     "The Tracker: I keep tabs on every single expense—I need to know where my money is going!":2
     }
