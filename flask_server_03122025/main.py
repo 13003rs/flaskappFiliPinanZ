@@ -214,30 +214,30 @@ def categorize_user_cashflow_input(value):
 
 # Function for categorizing/mapping the Goal Duration:
 def map_user_goal_duration(ui_savings_percentage_df):
-    # The values that I have set here are generated from the median of each values like for instance, the median of 1-2 months is 1.5
-    # Formula: (1+2)/2= 1.5, also yung sa years naka convert siya into months, hence why 18 yung value ni 1-2 years
-    ui_savings_percentage_df['Goal_Duration']=ui_savings_percentage_df['Goal_Duration'].map({
-    '1-2 months':1.5,
-    '3-5 months':4,
-    '6-12 months':9,
-    '1-2 years':18,
-    '3-5 years':48,
-    '6-10 years':96
-})
+    ui_savings_percentage_df['Goal_Duration'] = ui_savings_percentage_df['Goal_Duration'].map({
+        '1-2 months': 1.5,
+        '3-5 months': 4,
+        '6-12 months': 9,
+        '1-2 years': 18,
+        '3-5 years': 48,
+        '6-10 years': 96
+    })
+
+    # Ensure na updated ang DataFrame
+    return ui_savings_percentage_df  
 
 # Function for Savings Percentage Based on Target EFund Amount and Goal Duration:
-
 def get_required_monthly_savings(ui_savings_percentage_df):
-    user_target_efund_amount=ui_savings_percentage_df['Target_Efund_Amount'].values[0]
-    
-    # Have the Goal_Duration mapped first
-    ui_savings_percentage_df = map_user_goal_duration(ui_savings_percentage_df)
+    user_target_efund_amount = ui_savings_percentage_df['Target_Efund_Amount'].values[0]
 
-     # Then assign the value of the mapped Goal Duration
+    # Apply mapping and update DataFrame
+    ui_savings_percentage_df = map_user_goal_duration(ui_savings_percentage_df)  # FIX: Na-update na ngayon!
+
+    # Get mapped goal duration
     user_goal_duration = ui_savings_percentage_df['Goal_Duration'].values[0]
-    print(f"USER MAPPED GOAL DURATION:\n{user_goal_duration}") # For checking
+    print(f"USER MAPPED GOAL DURATION:\n{user_goal_duration}")  # Debugging
 
-    required_monthly_savings = user_target_efund_amount/user_goal_duration.round(2)
+    required_monthly_savings = user_target_efund_amount / user_goal_duration.round(2)
 
     return required_monthly_savings, user_goal_duration
 
