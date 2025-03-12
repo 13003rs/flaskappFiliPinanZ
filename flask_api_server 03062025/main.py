@@ -16,12 +16,12 @@ rfc_model=load('random_forest_model.joblib') # to load the model
 # Mappings for the responses (for preprocessing)
 allocation_behavior_map={
     "I will allocate my income into flexible budgets according to my needs and goals.": 8,
-    "I will allocate my money to specific categories (e.g, rent, groceries) and stick to the set amounts.": 2,
+    "I will allocate my money to specific categories (e.g., rent, groceries) and stick to the set amounts.": 2,
     "I will focus on saving or investing first, then freely spend for the remaining amount for the rest of the month.":3
     }
 
 finance_management_map={
-    "Save First, Spend Later: I make saving my top priority and only allocate what's left afterwards":6,
+    "Save First, Spend Later: My top priority is saving and I only spend what's left afterwards":6,
     "The Flexible Allocator: I divide my income between savings, essentials, and some fun—whatever feels right!":8,
     "The Tracker: I keep tabs on every single expense—I need to know where my money is going!":2
     }
